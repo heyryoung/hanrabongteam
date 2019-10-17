@@ -277,7 +277,7 @@ auth = (()=>{
 						error : e =>{
 							alert('AJAX실패' + url)
 						}
-					})
+					})    
 					alert('회원가입')
 				}
 			})
