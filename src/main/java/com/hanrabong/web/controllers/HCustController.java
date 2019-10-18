@@ -27,11 +27,21 @@ public class HCustController{
 	
 	@PostMapping("/join")
 	public @ResponseBody Map<?,?> join(@RequestBody HCustDTO hcust) {
-		logger.info("ajax가 보낸 아이디 {}", hcust.getCnum() +","+ hcust.getCpw());
+		logger.info("ajax가 보낸 아이디 {}", hcust.getCid() +","+ hcust.getCpw());
 		HashMap<String,String> map= new HashMap<>();
-		map.put("cnum",  hcust.getCnum());
+		map.put("cid",  "ser"+hcust.getCid());
 		map.put("cpw", hcust.getCpw());
-		logger.info("map에 담긴 아이디와 비번 {}", map.get("cnum") +","+ map.get("cpw"));
+		logger.info("map에 담긴 아이디와 비번 {}", map.get("cid") +","+ map.get("cpw"));
+		return map;
+	}
+	
+	@PostMapping("/login")
+	public @ResponseBody Map<?,?> login(@RequestBody HCustDTO hcust) {
+		logger.info("login>>>>ajax가 보낸 아이디 {}", hcust.getCid() +","+ hcust.getCpw());
+		HashMap<String,String> map= new HashMap<>();
+		map.put("cid",  hcust.getCid());
+		map.put("cpw", hcust.getCpw());
+		logger.info("login>>>>map에 담긴 아이디와 비번 {}", map.get("cid") +","+ map.get("cpw"));
 		return map;
 	}
 	

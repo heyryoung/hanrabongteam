@@ -12,7 +12,6 @@ app = (()=>{
 				_ = $.ctx();
 				js = $.js();
 				authjs = js+'/cmm/auth.js';
-
 			}
 			let onCreate = ()=>{
 				init();
@@ -24,6 +23,6 @@ app = (()=>{
 				.fail(()=>{alert(WHEN_ERR)}
 				)
 			}
-		return {run : run};
+		return {run};
 })();
 
