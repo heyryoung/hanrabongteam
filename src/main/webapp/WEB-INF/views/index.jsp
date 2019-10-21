@@ -11,5 +11,6 @@
 	<script src = "<%=application.getContextPath()%>/resources/js/vue/auth_vue.js"></script>
 <script>
 app.run('<%=application.getContextPath()%>');
+window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"/>')
 </script> 
 </html>

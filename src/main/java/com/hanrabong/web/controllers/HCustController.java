@@ -32,7 +32,7 @@ public class HCustController{
 		param.setCnum(String.valueOf(temp+1));
 		hCustService.insertHCust(param);
 		
-		return hCustService.selectHCustByCNum(temp);
+		return hCustService.selectHCustByCNum(temp+1);
 	}
 	
 	@PostMapping("/login")

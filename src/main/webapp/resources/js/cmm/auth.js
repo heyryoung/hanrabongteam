@@ -33,8 +33,10 @@ auth = (()=>{
 							href: '#' ,
 							click : e=>{
 								e.preventDefault();
-								let data = { cid :  $('#cid').val() ,
-										cpw : $('#cpw').val()
+								let data = { 
+										cid :  $('#cid').val() ,
+										cpw : $('#cpw').val(),
+										cname : $('#cname').val()
 								}
 								$.ajax({
 									url : _+'/hcust/join', 
@@ -77,16 +79,11 @@ auth = (()=>{
 						data: JSON.stringify(data) , 
 						contentType : 'application/json',
 						success : d =>{
-							if(d.cid !=""){
 								alert(d.cid + '님 환영합니다.')
 								mypage(d)
-							}else{
-								alert(d.cid + '님 환영합니다.')
-							}
-
 						},
 						error : e =>{
-							alert('AJAX ERROR' + url)
+							alert('AJAX ERROR' )
 						}
 					})    
 			}
@@ -96,7 +93,7 @@ auth = (()=>{
 	}
 	
 	let mypage = d=>{
-		let x = {css : $.css(), img : $.img(), js:$.js(), cid: d.cid}
+		let x = {css : $.css(), img : $.img(), js:$.js(), resultData: d}
 		$('head').html(auth_vue.mypage_head(x))
 		$('body')
 		.addClass('text-center')

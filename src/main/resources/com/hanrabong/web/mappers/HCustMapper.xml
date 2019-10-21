@@ -10,8 +10,8 @@
        <result column="cname" property="cname"/>
        <result column="gen" property="gen"/>
        <result column="birth" property="birth"/>
-       <result column="skinProb" property="skinProb"/>
-       <result column="skinType" property="skinType"/>
+       <result column="SKIN_PROB" property="skinProb"/>
+       <result column="SKIN_TYPE" property="skinType"/>
        <result column="child" property="child"/>
        <result column="addr" property="addr"/>
        <result column="tel" property="tel"/>
@@ -32,11 +32,11 @@
       SELECT * FROM HCUST WHERE CNUM LIKE #{cnum} 
    </select>
    
-      <select id="selectHCustById"  resultType="com.hanrabong.web.domains.HCustDTO">
+     <select id="selectHCustById"  resultType="com.hanrabong.web.domains.HCustDTO">
       SELECT * FROM HCUST WHERE CID LIKE #{cid} AND CPW LIKE #{cpw}
    </select>
    
-   <insert id="insertHCust">
+   <insert id="insertHCust" parameterType="com.hanrabong.web.domains.HCustDTO">
    INSERT INTO HCUST ( CNUM,CID, CPW, CNAME, GEN, BIRTH, SKIN_PROB, SKIN_TYPE, CHILD, ADDR, TEL, CPOINT)
   	VALUES (#{cnum},#{cid},#{cpw},#{cname},#{gen},#{birth},#{skinProb},#{skinType},#{child},#{addr},#{tel},#{cpoint})  
 </insert>
