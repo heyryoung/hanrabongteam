@@ -43,7 +43,7 @@ auth = (()=>{
 									data: JSON.stringify(data) , 
 									contentType : 'application/json',
 									success : d =>{
-										alert('AJAX 성공  cid : ' +d.cid+',  cpw: ' + d.cpw)
+										alert(d.cid + '님 환영합니다.')
 										login()
 									},
 									error : e =>{
@@ -77,10 +77,16 @@ auth = (()=>{
 						data: JSON.stringify(data) , 
 						contentType : 'application/json',
 						success : d =>{
-							alert('AJAX 성공  cid : ' +d.cid+',  cpw: ' + d.cpw)
+							if(d.cid !=""){
+								alert(d.cid + '님 환영합니다.')
+								mypage(d)
+							}else{
+								alert(d.cid + '님 환영합니다.')
+							}
+
 						},
 						error : e =>{
-							alert('AJAX실패' + url)
+							alert('AJAX ERROR' + url)
 						}
 					})    
 			}
@@ -89,7 +95,15 @@ auth = (()=>{
 		.appendTo('#btn_login')		
 	}
 	
-	return {onCreate, join, login}
+	let mypage = d=>{
+		let x = {css : $.css(), img : $.img(), js:$.js(), cid: d.cid}
+		$('head').html(auth_vue.mypage_head(x))
+		$('body')
+		.addClass('text-center')
+		.html(auth_vue.mypage_body(x))
+	}
+	
+	return {onCreate, join, login,mypage}
 })();
 
 
