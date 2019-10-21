@@ -23,7 +23,8 @@ import com.hanrabong.web.seviceImpls.HCustServiceImpl;
 public class HCustController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	@Autowired HCustServiceImpl hCustService;
+	@Autowired Map<String, Object>map;
+	@Autowired HCustDTO hcust;
 	
 	@PostMapping("/join")
 	public @ResponseBody Map<?,?> join(@RequestBody HCustDTO hcust) {
@@ -36,31 +37,13 @@ public class HCustController{
 	}
 	
 	@PostMapping("/login")
-	public @ResponseBody Map<?,?> login(@RequestBody HCustDTO hcust) {
-		logger.info("login>>>>ajax가 보낸 아이디 {}", hcust.getCid() +","+ hcust.getCpw());
-		HashMap<String,String> map= new HashMap<>();
-		map.put("cid",  hcust.getCid());
-		map.put("cpw", hcust.getCpw());
-		logger.info("login>>>>map에 담긴 아이디와 비번 {}", map.get("cid") +","+ map.get("cpw"));
-		return map;
+	public @ResponseBody HCustDTO login(@RequestBody HCustDTO param) {
+		logger.info("login>>>>ajax가 보낸 아이디 {}", param.getCid() +","+ param.getCpw());
+		hcust.setCid(param.getCid());
+		hcust.setCpw(param.getCpw());
+		logger.info("login>>>>map에 담긴 아이디와 비번 {}", hcust.getCid()+","+ hcust.getCpw());
+		return hcust;
 	}
-	
-	@GetMapping("/count")
-	public String count (Model model) {
-		int count = hCustService.countHCusts();
-		model.addAttribute("count", count);
-		
-		return "index";
-	}
-	
-	@GetMapping("/info")
-	public String findHCustByCNum(@RequestParam("cnum")  String cnum, 
-			@RequestParam("cpw") String cpw) {
-		
-		return "index";
-    }
-	
-	
 	
 }
  

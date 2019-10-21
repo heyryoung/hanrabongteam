@@ -2,6 +2,7 @@
 var auth = auth || {}
 
 auth = (()=>{
+	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
 	let _,js,auth_vuejs;
 	let init = ()=>{
 		_=$.ctx();
@@ -24,10 +25,9 @@ auth = (()=>{
 	}
 	
 	let join = ()=>{
-		alert('회원가입 클릭!!')
 				$.getScript(auth_vuejs)
 					$('head').html(auth_vue.join_head())
-					$('body').html(auth_vue.join_body()).addClass('text-center')
+					$('body').html(auth_vue.join_body())
 					$('<button>',{
 							text : 'Continue to checkout' , 
 							href: '#' ,
@@ -44,7 +44,6 @@ auth = (()=>{
 									contentType : 'application/json',
 									success : d =>{
 										alert('AJAX 성공  cid : ' +d.cid+',  cpw: ' + d.cpw)
-										e.preventDefault()
 										login()
 									},
 									error : e =>{
@@ -58,8 +57,9 @@ auth = (()=>{
 	}	
 	
 	let login = ()=>{
+
 		let x = {css : $.css(), img : $.img(), js:$.js() }
-		$('head').html(auth_vue.login_head(x))		
+		$('head').html(auth_vue.login_head(x))
 		$('body')
 		.addClass('text-center')
 		.html(auth_vue.login_body(x))
@@ -68,7 +68,21 @@ auth = (()=>{
 			text : "Log In",
 			click: 	e=>{									
 					e.preventDefault()
-					
+					let data = { cid :  $('#cid').val() ,
+							cpw : $('#cpw').val()}
+					$.ajax({
+						url : _+'/hcust/login', 
+						type : 'POST',
+						dataType : 'json',
+						data: JSON.stringify(data) , 
+						contentType : 'application/json',
+						success : d =>{
+							alert('AJAX 성공  cid : ' +d.cid+',  cpw: ' + d.cpw)
+						},
+						error : e =>{
+							alert('AJAX실패' + url)
+						}
+					})    
 			}
 		})
 		.addClass('btn btn-lg btn-primary btn-block')
@@ -77,3 +91,8 @@ auth = (()=>{
 	
 	return {onCreate, join, login}
 })();
+
+
+
+
+

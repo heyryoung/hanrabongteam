@@ -9,9 +9,7 @@
 	<script src = "<%=application.getContextPath()%>/resources/js/cmm/router.js"></script>
 	<script src = "<%=application.getContextPath()%>/resources/js/cmm/auth.js"></script>
 	<script src = "<%=application.getContextPath()%>/resources/js/vue/auth_vue.js"></script>
-</head>
 <script>
 app.run('<%=application.getContextPath()%>');
 </script> 
-</body>
 </html>
